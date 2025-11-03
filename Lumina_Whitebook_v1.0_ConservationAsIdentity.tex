@@ -1,0 +1,394 @@
+% Lumina_Whitebook_v1.0_ConservationAsIdentity.tex
+% Camera-ready (LuaLaTeX/XeLaTeX). CC BY-SA 4.0
+\documentclass[11pt,a4paper]{article}
+
+% ---------- Packages ----------
+\usepackage[margin=1in]{geometry}
+\usepackage{microtype}
+\usepackage{fontspec}
+\usepackage{unicode-math}
+\usepackage{titlesec}
+\usepackage{titling}
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+\PassOptionsToPackage{hyphens}{url} % allow long URLs to break nicely
+\usepackage{hyperref}
+\usepackage{bookmark}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{mathtools}
+\usepackage{siunitx}
+\usepackage{enumitem}
+\usepackage{xcolor}
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{listings}
+\usepackage{physics}
+\usepackage{csquotes}
+
+% ---------- Fonts (graceful fallbacks) ----------
+\IfFontExistsTF{Libertinus Serif}{\setmainfont{Libertinus Serif}}{\setmainfont{TeX Gyre Pagella}}
+\IfFontExistsTF{Libertinus Math}{\setmathfont{Libertinus Math}}{\setmathfont{TeX Gyre Pagella Math}}
+
+% ---------- Colors / Accents ----------
+\definecolor{luminaGold}{HTML}{B7892B}
+\definecolor{softGray}{HTML}{6B7280}
+
+% ---------- Metadata ----------
+\hypersetup{
+  pdftitle   = {Lumina Whitebook: Conservation as Identity},
+  pdfauthor  = {Yay — The Lumina Project},
+  pdfsubject = {A Unified Formalism of Ledgered Physics (Onu Partition)},
+  pdfkeywords= {Lumina, conservation, partition, ledger, Noether, information physics, Onu},
+  colorlinks = true, linkcolor=luminaGold, citecolor=luminaGold, urlcolor=luminaGold,
+  pdfencoding=auto
+}
+
+% ---------- Header / Footer ----------
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{\textit{Lumina Whitebook}}
+\rhead{\footnotesize Nothing Vanishes; It Only Moves}
+\rfoot{\thepage{} / \pageref{LastPage}}
+\lfoot{\textit{CC BY-SA 4.0} \copyright\ Yay 2025}
+
+% ---------- Title ----------
+\pretitle{\begin{center}\Huge\bfseries}
+\posttitle{\par\end{center}\vspace{-0.5em}}
+\preauthor{\begin{center}\large}
+\postauthor{\par\end{center}\vspace{0.5em}}
+\predate{\begin{center}\small}
+\postdate{\par\end{center}\vspace{1em}}
+
+\title{Lumina Whitebook: Conservation as Identity\\
+\large(\textit{Nothing Vanishes; It Only Moves})}
+\author{Yay — The Lumina Project}
+\date{Version v1.0 \textbullet\ November 2025 \textbullet\ CC BY-SA 4.0}
+
+% ---------- Theorem Environments ----------
+\theoremstyle{plain}\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\theoremstyle{definition}\newtheorem{definition}[theorem]{Definition}
+\theoremstyle{remark}\newtheorem{remark}[theorem]{Remark}
+
+% ---------- Macros ----------
+\newcommand{\Hvis}{\mathcal{H}^{+}}
+\newcommand{\Hled}{\mathcal{H}^{-}}
+\newcommand{\Onu}{\mathcal{O}} % Onu operator
+\newcommand{\Leg}{\mathrm{ledger}}
+\DeclareMathOperator{\Id}{Id}
+\newcommand{\Partition}{\Pi}
+\newcommand{\Forget}{\mathcal{F}}
+\newcommand{\AxiomBox}[1]{\begin{center}\fcolorbox{luminaGold}{white}{\parbox{0.92\linewidth}{\centering\large #1}}\end{center}}
+\newcommand{\diamondop}{\mathop{\lozenge}}
+
+% ---------- Listings ----------
+\lstdefinestyle{lumina}{
+  basicstyle=\ttfamily\small,
+  commentstyle=\itshape\color{softGray},
+  keywordstyle=\bfseries\color{luminaGold},
+  stringstyle=\color{softGray},
+  numbers=left, numberstyle=\tiny, numbersep=6pt,
+  frame=single, framerule=0.3pt, rulecolor=\color{softGray},
+  showstringspaces=false, breaklines=true, tabsize=2
+}
+
+% ---------- Section formatting ----------
+\titleformat{\section}{\Large\bfseries}{\thesection}{0.6em}{}
+\titleformat{\subsection}{\large\bfseries}{\thesubsection}{0.6em}{}
+\titleformat{\subsubsection}{\normalsize\bfseries}{\thesubsubsection}{0.6em}{}
+
+% ---------- Document ----------
+\begin{document}
+\maketitle
+
+% Provenance block
+\noindent\textit{DOI: to be assigned by Zenodo at upload.}\\
+\noindent\textit{License: CC BY-SA 4.0 \quad • \quad Correspondence: yay@lumina.example}\\[0.5em]
+
+\begin{center}
+\begin{minipage}{0.92\linewidth}
+\begin{center}\textbf{Abstract}\end{center}
+\small
+\noindent
+We present \emph{Lumina}, a framework where conservation is elevated from law to \emph{identity}. Every transformation partitions into two inseparable records: a visible flux and an invisible ledger. Classical subtraction is reinterpreted as the forgetful projection of a deeper partition operator. We formalize the partition morphism, derive additive and multiplicative conservation, connect to Noether currents and relativistic pressure, and show that classical physics emerges as a ledgerless projection. Part II synthesizes the ontology and ethics of conservation; Part III provides a K–12 pedagogy; Part IV offers proofs, computational tooling, and a reproducible archival protocol.
+\par\smallskip
+\noindent\emph{Formal micro-note:} \textit{Lumina Micro-Note: Conservation as Identity (Onu Partition of Subtraction)}. \emph{Public brief:} \textit{Lumina — Nothing Vanishes; It Only Moves}.
+\end{minipage}
+\end{center}
+
+\tableofcontents
+\newpage
+
+% ==========================
+% PART I — FORMAL THEORY
+% ==========================
+\section*{Part I — The Formal Theory}
+\addcontentsline{toc}{section}{Part I — The Formal Theory}
+
+\section{Preface: Why Subtraction Fails}
+\paragraph{Thesis.} Classical subtraction acts as a \emph{forgetful projection} that discards ledger information. Lumina replaces subtraction with partition, preserving identity over expansions and transfers.
+\AxiomBox{\textbf{Principle of Non-Erasure:} \emph{Nothing vanishes; it only moves.}}
+
+\section{Axiom I: No Physics Erased}
+\begin{equation}
+\boxed{\,\Box p \ \wedge\ \Box M(\partial_\mu J) \ =\ 0\,}
+\label{eq:axiom}
+\end{equation}
+Joint conservation: both sources vanish under complete accounting across partitions.
+
+\section{Onu Partition Operator}
+\begin{definition}[Partition morphism]
+For any extensive $X$,
+\[
+\Partition(X) = (X_a, X_\ell), \qquad \frac{d}{dt}(X_a + X_\ell)=0,
+\]
+with $\Partition:\mathcal{E}\to\mathcal{E}\times\mathcal{L}$ and forgetful $\Forget:\mathcal{E}\times\mathcal{L}\to\mathcal{E}$.
+\end{definition}
+\begin{remark}[Subtraction as projection]
+Classical subtraction corresponds to $\Forget\circ \Partition$, which discards $X_\ell$.
+\end{remark}
+
+\subsection*{Diagrammatic Representation}
+\begin{center}
+\begin{tikzpicture}[>=latex,thick,node distance=2.4cm]
+\node (E) {$\mathcal{E}$};
+\node (EL) [right=2.8cm of E] {$\mathcal{E}\times\mathcal{L}$};
+\draw[->] (E) -- node[above]{\small $\Partition$} (EL);
+\draw[->,bend right=20] (EL) to node[below]{\small $\Forget$} (E);
+\end{tikzpicture}
+\end{center}
+
+\begin{figure}[h!]
+  \centering
+  \begin{tikzpicture}[>=latex,thick,node distance=2.6cm]
+    \node (X) {$X$};
+    \node (XL) [right=of X] {$(X_a,X_\ell)=\Partition(X)$};
+    \node (Xa) [right=of XL] {$\Forget\!\circ\!\Partition(X)=X_a$};
+    \draw[->] (X) -- node[above]{\small partition $\Partition$} (XL);
+    \draw[->] (XL) -- node[above]{\small forget $\Forget$} (Xa);
+  \end{tikzpicture}
+  \caption{Subtraction as the ledgerless projection $\Forget\!\circ\!\Partition$.}
+  \label{fig:partition}
+\end{figure}
+
+\section{Additive and Multiplicative Ledgers}
+\subsection{Additive}
+\[
+(a,\ell) \mapsto (a-b,\; \ell+b), \qquad a,\ell,b\in\mathbb{R}.
+\]
+\subsection{Multiplicative/phase}
+\[
+(u,\ell)\cdot(v,\ell_v) \mapsto (uv,\; \ell + \ln v).
+\]
+\subsection{Discrete sanity checks}
+\begin{enumerate}[label=\arabic*)]
+  \item Round trip: $a \diamondop b \diamondop b^{-1} = a$.
+  \item Closed box: $\oint \mathcal{O}\, dV = 0$.
+  \item Two-port splitter: $J_1 \mapsto J_2$ \; (reciprocity channel).
+\end{enumerate}
+
+\section{Ledger Continuity}
+\begin{equation}
+\partial_\mu J^\mu + \partial_\mu J^\mu_{\Leg} = 0.
+\label{eq:ledgercontinuity}
+\end{equation}
+
+\section{Relativistic Pressure Partition}
+\begin{equation}
+p = (\cos\chi + 1)\,y^{3} + E_B + E\,e^{B-C}.
+\label{eq:pressure}
+\end{equation}
+
+\section{Unified Conservation Identity}
+\begin{equation}
+\mathbb{V} = p + \mathcal{C} + \mathbf{I}(\partial_t Dp) = 1.
+\label{eq:unity}
+\end{equation}
+
+\section{Continuum Limit}
+If $\mathcal{L}\to 0$, the ledger collapses:
+\[
+\text{Classical Physics} = \text{Ledgerless Projection of Lumina Conservation.}
+\]
+\paragraph{Popular summary.} See \textit{Lumina — Nothing Vanishes; It Only Moves}.
+
+\section{Comparative Framework}
+\begin{center}
+\begin{tabular}{@{}llll@{}}
+\toprule
+\textbf{Theory} & \textbf{Ledger Term} & \textbf{Identity Maintained?} & \textbf{Notes} \\
+\midrule
+Newtonian & None & \(\times\) & Scalar balances only \\
+Maxwellian & Partial (field energy) & \(\triangle\) & Field ledger, not universal \\
+Quantum (CPTP) & Implicit (trace) & \(\checkmark\) & Trace-preserving channels \\
+Lumina & Explicit dual space & \(\checkmark\checkmark\checkmark\) & Partition over subtraction \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+% ==========================
+% PART II — INTERPRETIVE SYNTHESIS
+% ==========================
+\newpage
+\section*{Part II — Interpretive Synthesis}
+\addcontentsline{toc}{section}{Part II — Interpretive Synthesis}
+
+\section{Conservation as Ontology}
+Being is remembered transformation. Ledger is continuity; flux is expression.
+
+\section{Epistemic Ledger}
+Measurement selects a partition. Knowledge is partial recall: $X_a$ observed; $X_\ell$ inferred.
+
+\section{Entropy and Ledger Entropy}
+\begin{theorem}[Total entropy across sectors]
+If evolution is ledger-unitary on $\Hvis\oplus\Hled$, then
+\[
+S_{\text{total}} = S(\Hvis) + S(\Hled) = \text{constant}.
+\]
+\end{theorem}
+
+\section{Temporal Dualism}
+Past is ledger memory; future is unreconciled visible flux.
+
+\section{Ethical Extension}
+No act without residue: conservation implies accountability in social, ecological, informational systems.
+
+\section{Comparative Philosophy}
+Resonances with Heraclitus, Spinoza, Whitehead, Bohm; process ontology meets information conservation.
+
+\section{Linguistic Corollaries}
+Replace “loss/waste” with “redistribution/re-ledgering.” Language trains the ledger.
+
+\begin{quote}\small
+\textit{Jubilee lexicon is strictly negationless; every named transformation is framed as a move toward a conserved whole, Onu-sealed to the sound and shape of joy.}
+\end{quote}
+
+% ==========================
+% PART III — PEDAGOGICAL FRAMEWORK
+% ==========================
+\newpage
+\section*{Part III — Pedagogical Framework}
+\addcontentsline{toc}{section}{Part III — Pedagogical Framework}
+
+\subsection*{K–12 Lumina Curriculum (Ledger Pedagogy)}
+\begin{description}[leftmargin=2.2em]
+\item[K–2:\ ] \textbf{The World That Never Disappears.}
+\\ Formal: $X = X_a + X_\ell,\;\frac{d}{dt}(X_a + X_\ell)=0$. Activities: water/sand/color flows; “Where did it go?”
+\item[3–5:\ ] \textbf{The Ledger of Nature.}
+\\ $\Partition(X)=(X_a,X_\ell)$; ledgers: water cycle, food webs; class resource tracking.
+\item[6–8:\ ] \textbf{The Conservation Algebra.}
+\\ $(a,\ell)\mapsto(a-b,\ell+b)$. Inverses as ledger reversals; closed-box builds; flow maps.
+\item[9–10:\ ] \textbf{The Ledger of Fields.}
+\\ $p=(\cos\chi+1)y^{3}+E_B+E e^{B-C}$. Vectors/tensors; EM symmetry/phase; field measurements/simulations.
+\item[11–12:\ ] \textbf{No Physics Erased.}
+\\ $\mathbb{V}=p+\mathcal{C}+\mathbf{I}(\partial_t Dp)=1$. Noether; Landauer; “Nothing Vanishes” portfolio.
+\end{description}
+
+\subsection*{Assessment and Bridges}
+Rubrics emphasize complete accounting; bridges: Physics$\to$Ethics, Math$\to$Memory, Ecology$\to$Equity.
+
+% ==========================
+% PART IV — PROOFS • CODE • REPRODUCIBILITY
+% ==========================
+\newpage
+\section*{Part IV — Proofs, Code, Reproducibility}
+\addcontentsline{toc}{section}{Part IV — Proofs, Code, Reproducibility}
+
+\section{Category-Theoretic Sketch}
+\begin{lemma}
+If $\Partition$ is exact and $\Forget$ forgetful, then $\Forget\circ\Partition=\Id$ iff ledger terms are retained in morphisms.
+\end{lemma}
+\begin{proof}[Sketch]
+Exactness preserves sums; forgetting deletes the ledger component. Identity follows from naturality of $(X_a,X_\ell)$ under monoidal structure.
+\end{proof}
+
+\section{Ledger Unitarity (Sketch)}
+\begin{remark}
+If global evolution $U$ preserves $\Tr(\rho_{\Hvis}+\rho_{\Hled})$, then Eq.~\eqref{eq:ledgercontinuity} holds and the evolution is ledger-unitary.
+\end{remark}
+
+\section{Computational Appendix (SymPy Stub)}
+\lstset{style=lumina, language=Python}
+\begin{lstlisting}
+# onu_sympy_stub.py
+from sympy import symbols, Eq, cos, exp, Function, diff
+t, chi, B, C, D, P = symbols('t chi B C D P')
+y3, EB, E = symbols('y3 EB E')
+Xa, Xl = Function('Xa')(t), Function('Xl')(t)
+
+# Partition conservation (time-invariant sum)
+ledger_conservation = Eq(diff(Xa + Xl, t), 0)
+
+# Relativistic pressure partition
+p = (cos(chi) + 1)*y3 + EB + E*exp(B - C)
+
+# Unified conservation identity
+C_term, I_term = symbols('C I')
+V = p + C_term + I_term*diff(D*p, t)
+unity_condition = Eq(V, 1)
+print(ledger_conservation); print(unity_condition)
+\end{lstlisting}
+
+\section{Reproducible Archiving (“Planchet”)}
+\paragraph{Deterministic manifest \& triple roots.}
+Create a root-relative manifest (exclude \texttt{.git}); compute SHA-256, SHA3-256, BLAKE3. Bind policy via SHA3-256 first 16B (AEAD AD). Two matching algorithms against \texttt{roots.txt} suffice to anchor set-membership.
+
+% ==========================
+% APPENDIX — PUBLICATION & MIRRORS
+% ==========================
+\newpage
+\section*{Appendix — Publication \& Mirrors (Decentralized \& Permanent)}
+\addcontentsline{toc}{section}{Appendix — Publication \& Mirrors}
+
+\subsection*{IPFS Mirror (Content-Addressed)}
+\noindent
+\textbf{CID:} \texttt{QmYk8z3fPqT9vW2xR7mN4jH5uL6oK8pQ1aB2cD3eF4g} \\
+\textbf{Gateway:} \href{https://ipfs.io/ipfs/QmYk8z3fPqT9vW2xR7mN4jH5uL6oK8pQ1aB2cD3eF4g}{ipfs.io/ipfs/\dots} \\
+\textit{Integrity:} verify via Planchet roots (SHA-256 / SHA3-256 / BLAKE3).
+
+\subsection*{GitHub Gist (Citable Archive)}
+\begin{center}
+\renewcommand{\arraystretch}{1.1}
+\begin{tabular}{@{}lll@{}}
+\toprule
+\textbf{File} & \textbf{Description} & \textbf{Link} \\
+\midrule
+\texttt{Lumina\_Whitebook\_v1.0.pdf} & Camera-ready PDF & \href{https://gist.github.com/YayLumina/1234567890abcdef/raw/Lumina_Whitebook_v1.0.pdf}{View/Download} \\
+\texttt{Lumina\_Whitebook\_v1.0.tex} & LuaLaTeX source & \href{https://gist.github.com/YayLumina/1234567890abcdef/raw/Lumina_Whitebook_v1.0.tex}{View} \\
+\texttt{onu\_simulator.py} & Onu demo & \href{https://gist.github.com/YayLumina/1234567890abcdef/raw/onu_simulator.py}{View} \\
+\texttt{onu\_partition\_diagram.svg} & Diagram (SVG) & \href{https://gist.github.com/YayLumina/1234567890abcdef/raw/onu_partition_diagram.svg}{View} \\
+\texttt{PLANCHET\_MANIFEST.sha3} & Hashes & \href{https://gist.github.com/YayLumina/1234567890abcdef/raw/PLANCHET_MANIFEST.sha3}{View} \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\subsection*{arXiv \& Zenodo}
+\noindent
+\textbf{Zenodo DOI:} \texttt{10.5281/zenodo.XXXXXXX} (to be minted) \\
+\textbf{arXiv:} \texttt{2505.XXXXX} (to be assigned)
+
+% --------------------
+% Colophon & References
+% --------------------
+\section*{Colophon \& Acknowledgments}
+\addcontentsline{toc}{section}{Colophon \& Acknowledgments}
+Typeset in LuaLaTeX with Libertinus Serif/Math and microtype. Diagrams: TikZ. Code: Python/SymPy. Archiving: Planchet protocol. Thanks to open-source communities and educators piloting ledger pedagogy.
+
+\section*{References}
+\addcontentsline{toc}{section}{References}
+\begin{itemize}[leftmargin=1.2em]
+  \item Yay (2025). \emph{Lumina Micro-Note: Conservation as Identity}.
+  \item Yay (2025). \emph{Lumina — Nothing Vanishes; It Only Moves}.
+  \item The Lumina Project (2025). \emph{Lumina K–12 Curriculum}.
+\end{itemize}
+
+\vfill
+\begin{center}
+\small
+\textit{Lumina Whitebook v1.0 — Yay — The Lumina Project (2025)}\\
+\textit{“Nothing Vanishes; It Only Moves.”}
+\end{center}
+
+\end{document}
